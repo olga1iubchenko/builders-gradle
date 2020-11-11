@@ -29,3 +29,25 @@ war {
     classpath fileTree('libs')
     webXml = file('/web/src/main/resources/web_config.properties')
 }
+
+test {
+  useJUnit()
+  useJUnitPlatform()
+
+  minHeapSize = "128m"
+  maxHeapSize = "512m"
+
+
+  jvmArgs '-XX:MaxPermSize=256m'
+
+
+  beforeTest { descriptor ->
+     logger.lifecycle("Running test: " + descriptor)
+  }
+
+  failFast = true
+
+  onOutput { descriptor, event ->
+     logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message )
+  }
+}

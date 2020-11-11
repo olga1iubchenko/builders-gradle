@@ -174,5 +174,40 @@ war {
  gradle :<module_name>:build
  ``` 
  
+  # Running Tests
  
+ Fully-qualified name pattern
+Prior to 4.7 or if the pattern doesn’t start with an uppercase letter, Gradle treats the pattern as fully-qualified. So if you want to use the test class name irrespective of its package, you would use --tests *.SomeTestClass. Here are some more examples:
+ ```sh
+# specific class
+gradle test --tests org.gradle.SomeTestClass
+
+# specific class and method
+gradle test --tests org.gradle.SomeTestClass.someSpecificMethod
+
+# method name containing spaces
+gradle test --tests "org.gradle.SomeTestClass.some method containing spaces"
+
+# all classes at specific package (recursively)
+gradle test --tests 'all.in.specific.package*'
+
+# specific method at specific package (recursively)
+gradle test --tests 'all.in.specific.package*.someSpecificMethod'
+
+gradle test --tests '*IntegTest'
+
+gradle test --tests '*IntegTest*ui*'
+
+gradle test --tests '*ParameterizedTest.foo*'
+
+# the second iteration of a parameterized test
+gradle test --tests '*ParameterizedTest.*[2]'
+Note that the wildcard '*' has no special understanding of the '.' package separator. It’s purely text based. So --tests *.SomeTestClass will match any package, regardless of its 'depth'.
+
+ ```
+You can also combine filters defined at the command line with continuous build to re-execute a subset of tests immediately after every change to a production or test source file. The following executes all tests in the 'com.mypackage.foo' package or subpackages whenever a change triggers the tests to run:
+```sh
+gradle test --continuous --tests "com.mypackage.foo.*"
+ ```
+
  

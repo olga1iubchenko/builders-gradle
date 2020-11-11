@@ -10,7 +10,7 @@ A text editor or IDE - for example [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 A Java Development Kit (JDK), version 8 or higher
 
-The latest [Gradle distribution](Gradle distribution)
+The latest [Gradle distribution](https://gradle.org/install)
 
 **Create a project folder**
 Gradle comes with a built-in task, called init, that initializes a new Gradle project in an empty folder. The init task uses the (also built-in) wrapper task to create a Gradle wrapper script, gradlew.
